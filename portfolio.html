@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Deepika R — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root{
+  --black:#09090b;
+  --deep:#0f0f12;
+  --card:#141417;
+  --card2:#1a1a1e;
+  --border:#252528;
+  --border2:#2e2e33;
+  --red:#6a0c14;
+  --red-dark:#8d1723;
+  --red-glow:rgba(232,25,44,0.12);
+  --red-glow2:rgba(232,25,44,0.07);
+  --white:#f2f2f4;
+  --muted:#7a7a82;
+  --light:#b8b8c2;
+  --radius:2px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+
+/* ═══════════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════════ */
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 5%}
+.section-eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:0.9rem}
+.section-eyebrow::before{content:'';width:20px;height:2px;background:var(--red);flex-shrink:0}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:2px;line-height:1;color:var(--white)}
+.section-rule{width:40px;height:3px;background:var(--red);margin:1rem 0 2.8rem}
+.tag{font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:0.22rem 0.6rem;border:1px solid var(--border2);color:var(--muted);letter-spacing:0.5px;border-radius:var(--radius)}
+.btn-red{display:inline-flex;align-items:center;gap:0.5rem;background:var(--red);color:#fff;padding:0.8rem 1.8rem;font-size:0.78rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s,transform .15s;border-radius:var(--radius)}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--white);padding:0.8rem 1.8rem;font-size:0.78rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border:1px solid var(--border2);cursor:pointer;transition:border-color .2s,color .2s,transform .15s;border-radius:var(--radius)}
+.btn-ghost:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+
+/* Scroll margin so fixed nav doesn't cover section headings on anchor jump */
+section,#stats-bar{scroll-margin-top:62px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(9,9,11,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px;max-width:1200px;margin:0 auto;padding:0 5%}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--white)}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{font-size:0.72rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-resume{background:var(--red);color:#fff;padding:0.42rem 1.1rem;font-size:0.72rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;border-radius:var(--radius)}
+.nav-resume:hover{background:var(--red-dark)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{width:22px;height:2px;background:var(--white);transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;background:var(--deep);border-bottom:1px solid var(--border);z-index:199;padding:1.5rem 5%}
+.mobile-menu.open{display:block}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:1rem}
+.mobile-menu a{font-size:0.85rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+#hero{min-height:100vh;display:flex;align-items:center;padding:8rem 0 5rem;position:relative;overflow:hidden}
+.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:56px 56px;opacity:.25}
+.hero-bg-glow{position:absolute;top:-15%;left:-8%;width:600px;height:600px;background:radial-gradient(circle,rgba(232,25,44,.1) 0%,transparent 65%);pointer-events:none}
+.hero-bg-glow2{position:absolute;bottom:-20%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(232,25,44,.06) 0%,transparent 65%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 5%;width:100%}
+.hero-status{display:inline-flex;align-items:center;gap:0.5rem;border:1px solid rgba(232,25,44,.4);color:var(--red);padding:0.32rem 0.85rem;font-size:0.68rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.6rem;animation:fadeUp .5s ease both}
+.hero-status-dot{width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 1.5s infinite}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.1rem,3vw,1.4rem);letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:.6rem;animation:fadeUp .5s .08s ease both}
+.hero-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.2rem,8.5vw,7.5rem);line-height:.92;letter-spacing:1.5px;margin-bottom:1.6rem;animation:fadeUp .5s .16s ease both}
+.hero-headline .line-red{color:var(--red)}
+.hero-headline .line-dim{color:var(--light)}
+.hero-value{font-size:clamp(.95rem,1.8vw,1.12rem);color:var(--light);font-weight:300;max-width:520px;line-height:1.75;margin-bottom:1.8rem;animation:fadeUp .5s .24s ease both;word-break:break-word}
+.hero-value strong{color:var(--white);font-weight:500}
+.hero-roles{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:2.2rem;animation:fadeUp .5s .32s ease both}
+.hero-roles-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.hero-role-chip{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.28rem .75rem;border:1px solid rgba(232,25,44,.3);color:var(--light);background:rgba(232,25,44,.05);letter-spacing:.5px;border-radius:var(--radius);transition:border-color .2s,color .2s}
+.hero-role-chip:hover{border-color:var(--red);color:var(--white)}
+.hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;animation:fadeUp .5s .4s ease both}
+.hero-scroll-hint{position:absolute;bottom:2rem;left:5%;display:flex;align-items:center;gap:.7rem;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);animation:fadeUp .5s .6s ease both}
+.scroll-line{width:36px;height:1px;background:var(--border2);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--red);animation:scanLine 2s infinite}
+@keyframes scanLine{to{left:100%}}
+
+/* ═══════════════════════════════════════════
+   QUICK STATS BAR
+═══════════════════════════════════════════ */
+#stats-bar{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-bar-inner{max-width:1200px;margin:0 auto;padding:0 5%;display:flex;align-items:stretch;justify-content:space-between}
+.stat-item{padding:1.4rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;flex:1;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--red);line-height:1}
+.stat-l{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-align:center}
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+#about{padding:5.5rem 0;background:var(--black)}
+.about-inner{max-width:1200px;margin:0 auto;padding:0 5%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-text p{font-size:.97rem;line-height:1.85;color:var(--light);font-weight:300;margin-bottom:1.1rem}
+.about-text p strong{color:var(--white);font-weight:500}
+.about-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.6rem}
+.about-tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.32rem .85rem;border:1px solid var(--border2);color:var(--muted);letter-spacing:.5px;border-radius:var(--radius);transition:border-color .2s,color .2s}
+.about-tag:hover{border-color:var(--red);color:var(--white)}
+.about-cards{display:flex;flex-direction:column;gap:1rem}
+.about-card{background:var(--card);border:1px solid var(--border);padding:1.4rem 1.6rem;display:flex;align-items:flex-start;gap:1rem;position:relative;border-radius:var(--radius);transition:border-color .2s}
+.about-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red);border-radius:2px 0 0 2px}
+.about-card:hover{border-color:var(--border2)}
+.about-icon{width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--red-glow);border:1px solid rgba(232,25,44,.22);border-radius:var(--radius)}
+.about-card-text h4{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;margin-bottom:.25rem}
+.about-card-text p{font-size:.84rem;color:var(--muted);line-height:1.6}
+
+/* ═══════════════════════════════════════════
+   Skill Stack
+═══════════════════════════════════════════ */
+#Skill Stack{padding:5.5rem 0;background:var(--black)}
+.Skill Stack-inner{max-width:1200px;margin:0 auto;padding:0 5%}
+.Skill Stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.skill-card{background:var(--card);border:1px solid var(--border);padding:1.6rem;position:relative;overflow:hidden;border-radius:var(--radius);transition:border-color .25s,transform .2s}
+.skill-card:hover{border-color:var(--red);transform:translateY(-3px)}
+.skill-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.skill-card:hover::after{transform:scaleX(1)}
+.skill-icon{width:34px;height:34px;margin-bottom:1.1rem}
+.skill-card h4{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--red);margin-bottom:.85rem}
+.skill-pills{display:flex;flex-wrap:wrap;gap:.4rem}
+.skill-pill{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:.25rem .65rem;background:rgba(232,25,44,.07);border:1px solid rgba(232,25,44,.18);color:var(--light);letter-spacing:.4px;border-radius:var(--radius)}
+
+/* ═══════════════════════════════════════════
+   FEATURED PROJECTS (top strip)
+═══════════════════════════════════════════ */
+#featured{padding:5rem 0 5.5rem;background:var(--deep)}
+.featured-inner{max-width:1200px;margin:0 auto;padding:0 5%}
+.featured-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2.5rem;overflow:hidden;border-radius:var(--radius)}
+.feat-item{background:var(--card);padding:1.4rem 1.2rem;display:flex;flex-direction:column;gap:.5rem;transition:background .2s}
+.feat-item:hover{background:var(--card2)}
+.feat-domain{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:600}
+.feat-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1.5px;line-height:1.1;color:var(--white)}
+.feat-impact{font-size:.75rem;color:var(--muted);line-height:1.4;margin-top:.2rem}
+.feat-impact strong{color:var(--light)}
+
+/* ═══════════════════════════════════════════
+   PROJECTS (detailed)
+═══════════════════════════════════════════ */
+#projects{padding:5.5rem 0;background:var(--deep)}
+.projects-inner{max-width:1200px;margin:0 auto;padding:0 5%}
+.projects-intro{font-size:.88rem;color:var(--muted);max-width:600px;line-height:1.7;margin-bottom:3rem}
+.project-card{background:var(--card);border:1px solid var(--border);overflow:hidden;border-radius:var(--radius);transition:border-color .25s,transform .2s;margin-bottom:2rem}
+.project-card:last-child{margin-bottom:0}
+.project-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+
+/* Banner */
+.proj-banner{height:190px;position:relative;overflow:hidden;background:var(--black);border-bottom:1px solid var(--border)}
+.proj-banner svg{width:100%;height:100%;display:block}
+.proj-banner-fade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(20,20,23,.96) 100%)}
+.proj-banner-domain{position:absolute;bottom:.9rem;left:1.4rem;font-size:.6rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--red)}
+.proj-banner-badge{position:absolute;top:.9rem;right:1rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;padding:.2rem .6rem;border:1px solid rgba(255,185,0,.3);color:rgba(255,195,30,.85);background:rgba(255,180,0,.06);letter-spacing:1px;text-transform:uppercase;border-radius:var(--radius)}
+
+/* Body */
+.proj-body{padding:1.6rem 1.8rem 1.8rem}
+.proj-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.9rem}
+.proj-title{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:1.5px;line-height:1.05}
+.proj-tools{display:flex;gap:.4rem;flex-wrap:wrap;padding-top:.3rem}
+.proj-tool{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.18rem .6rem;border:1px solid var(--border2);color:var(--muted);letter-spacing:.4px;border-radius:var(--radius)}
+
+/* Steps */
+.proj-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.4rem}.proj-step{background:var(--card2);padding:.9rem 1rem}
+.proj-step-label{font-size:.58rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:.35rem}
+.proj-step-text{font-size:.78rem;color:var(--light);line-height:1.5}
+
+/* Impact */
+.proj-impact{background:var(--red-glow2);border-left:3px solid var(--red);padding:.75rem 1.1rem;font-size:.83rem;color:var(--light);line-height:1.55;border-radius:0 var(--radius) var(--radius) 0}
+.proj-impact strong{color:var(--white)}
+
+/* ═══════════════════════════════════════════
+   DASHBOARDS
+═══════════════════════════════════════════ */
+#dashboards{padding:5.5rem 0;background:var(--black)}
+.dash-inner{max-width:1200px;margin:0 auto;padding:0 5%}
+.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;align-items:stretch}
+.dash-card{background:var(--card);border:1px solid var(--border);overflow:hidden;border-radius:var(--radius);transition:border-color .25s,transform .2s;display:flex;flex-direction:column}
+.dash-card:hover{border-color:var(--red);transform:translateY(-3px)}
+.dash-screen{height:170px;background:var(--black);overflow:hidden;position:relative;flex-shrink:0}
+.dash-screen svg{width:100%;height:100%}
+.dash-body{padding:1.3rem;flex:1;display:flex;flex-direction:column}
+.dash-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;margin-bottom:.4rem}
+.dash-desc{font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:.9rem;flex:1}
+.dash-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:auto}
+.dash-tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--red);padding:.22rem .6rem;border:1px solid rgba(232,25,44,.28);border-radius:var(--radius)}
+
+/* ═══════════════════════════════════════════
+   RESUME CTA
+═══════════════════════════════════════════ */
+#resume-cta{background:var(--red);padding:4rem 0;text-align:center}
+.resume-inner{max-width:700px;margin:0 auto;padding:0 5%}
+.resume-inner .section-eyebrow{color:rgba(255,255,255,.7);justify-content:center}
+.resume-inner .section-eyebrow::before{background:rgba(255,255,255,.7)}
+.resume-inner .section-title{color:#fff;margin-bottom:.8rem}
+.resume-inner p{color:rgba(255,255,255,.8);font-size:.97rem;line-height:1.7;margin-bottom:2rem}
+.btn-white{display:inline-flex;align-items:center;gap:.6rem;background:#fff;color:var(--red);padding:.9rem 2.2rem;font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;border-radius:var(--radius)}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.3)}
+
+/* ═══════════════════════════════════════════
+   CONTACT  — large, icon-led
+═══════════════════════════════════════════ */
+#contact{padding:5.5rem 0;background:var(--deep)}
+.contact-inner{max-width:1200px;margin:0 auto;padding:0 5%}
+.contact-intro{font-size:.97rem;color:var(--muted);max-width:540px;line-height:1.75;margin-bottom:3rem}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+
+/* Big icon cards */
+.contact-channels{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.contact-channel{display:flex;flex-direction:column;align-items:flex-start;gap:1rem;padding:1.8rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;transition:border-color .2s,transform .15s,background .2s;position:relative;overflow:hidden}
+.contact-channel::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.contact-channel:hover{border-color:var(--red);transform:translateY(-3px);background:var(--card2)}
+.contact-channel:hover::after{transform:scaleX(1)}
+.channel-icon-wrap{width:52px;height:52px;background:var(--red-glow);border:1px solid rgba(232,25,44,.25);display:flex;align-items:center;justify-content:center;border-radius:var(--radius)}
+.channel-icon-wrap svg{width:24px;height:24px;fill:var(--red)}
+.channel-label{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600}
+.channel-value{font-size:.92rem;color:var(--white);font-weight:500;line-height:1.3}
+.channel-action{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-top:.3rem}
+
+/* Form */
+.contact-form{display:flex;flex-direction:column;gap:.9rem}
+.contact-form-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;margin-bottom:.4rem}
+.contact-form-sub{font-size:.84rem;color:var(--muted);margin-bottom:.6rem;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.contact-form input,.contact-form textarea,.contact-form select{background:var(--card);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:.88rem;padding:.8rem 1rem;outline:none;transition:border-color .2s;border-radius:var(--radius);width:100%;-webkit-appearance:none;-moz-appearance:none;appearance:none}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:var(--red)}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--muted)}
+.contact-form textarea{resize:vertical;min-height:110px}
+.contact-form select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7a82' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
+.contact-form select option{background:var(--card2);color:var(--white)}
+.channel-value{font-size:.92rem;color:var(--white);font-weight:500;line-height:1.3;word-break:break-word}
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{background:var(--black);border-top:1px solid var(--border);padding:1.4rem 0}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:3px}
+.footer-logo span{color:var(--red)}
+footer p{font-size:.72rem;color:var(--muted)}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Prevent grid children from overflowing their cell */
+.proj-step,.feat-item,.skill-card,.contact-channel,.dash-card{min-width:0}
+
+/* Better tap targets & remove iOS tap highlight */
+a,button,.contact-channel,.skill-card{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — TABLET  (≤900px)
+═══════════════════════════════════════════ */
+@media(max-width:900px){
+  .nav-links,.nav-resume{display:none}
+  .nav-hamburger{display:flex}
+
+  section{padding:4.5rem 0}
+  #featured{padding:4rem 0 4.5rem}
+  .section-rule{margin:0.8rem 0 2rem}
+
+  .about-inner{grid-template-columns:1fr;gap:2.5rem}
+
+  .Skill Stack-grid{grid-template-columns:repeat(2,1fr)}
+
+  .featured-strip{grid-template-columns:repeat(2,1fr)}
+  .feat-item:nth-child(5){display:none}
+
+  /* Project steps: 2-col on tablet */
+  .proj-steps{grid-template-columns:repeat(2,1fr)}
+  .proj-step:nth-child(5){grid-column:1/-1}
+  .proj-body{padding:1.4rem 1.4rem 1.6rem}
+
+  .dash-grid{grid-template-columns:1fr 1fr}
+
+  /* Contact: stack form below channels */
+  .contact-grid{grid-template-columns:1fr;gap:2.5rem}
+
+  /* Stats: 3-across on tablet */
+  .stats-bar-inner{flex-wrap:wrap}
+  .stat-item{flex:1 1 calc(33.33% - 2px);border-right:none;border-bottom:1px solid var(--border);min-width:0}
+  .stat-item:nth-child(-n+3){border-bottom:1px solid var(--border)}
+  .stat-item:nth-child(4),.stat-item:nth-child(5){border-bottom:none}
+
+  /* Hide hero scroll hint on tablet to avoid overlap */
+  .hero-scroll-hint{display:none}
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MID MOBILE (≤750px)
+   Fixes the cramped 600–750px gap zone
+═══════════════════════════════════════════ */
+@media(max-width:750px){
+  /* Steps: drop to single column earlier */
+  .proj-steps{grid-template-columns:1fr}
+  .proj-step:nth-child(5){grid-column:auto}
+  .proj-step-text{font-size:.8rem}
+
+  /* Contact channels: single column */
+  .contact-channels{grid-template-columns:1fr}
+  .contact-channel{flex-direction:row;align-items:center;gap:1.2rem;padding:1.2rem 1.4rem}
+
+  .proj-header{flex-direction:column;gap:.6rem}
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MOBILE  (≤600px)
+═══════════════════════════════════════════ */
+@media(max-width:600px){
+  section{padding:3.5rem 0}
+  #featured{padding:3rem 0 3.5rem}
+  .section-rule{margin:0.6rem 0 1.6rem}
+
+  #hero{padding:6.5rem 0 3.5rem;min-height:auto}
+  .hero-headline{font-size:clamp(2.8rem,14vw,3.8rem)}
+  .hero-value{font-size:.92rem}
+  .hero-roles{gap:.4rem}
+  .hero-role-chip{font-size:.6rem;padding:.22rem .6rem}
+  /* Stack CTAs vertically on small screens */
+  .hero-ctas{flex-direction:column;gap:.7rem;align-items:flex-start}
+  .btn-red,.btn-ghost{width:100%;justify-content:center;padding:.8rem 1.4rem;font-size:.75rem}
+
+  /* Stats: single column */
+  .stats-bar-inner{flex-direction:column}
+  .stat-item{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--border);padding:1rem;border-bottom:1px solid var(--border) !important}
+  .stat-item:last-child{border-bottom:none !important}
+  .stat-n{font-size:1.7rem}
+
+  .Skill Stack-grid{grid-template-columns:1fr}
+  .skill-card{padding:1.3rem}
+
+  .featured-strip{grid-template-columns:1fr}
+  .feat-item:nth-child(n+4){display:none}
+
+  .proj-banner{height:130px}
+  .proj-body{padding:1.2rem 1.2rem 1.4rem}
+  .proj-title{font-size:1.3rem}
+  .proj-step{padding:.75rem .85rem}
+  .proj-impact{padding:.65rem .85rem;font-size:.8rem}
+
+  .dash-grid{grid-template-columns:1fr}
+  .dash-screen{height:145px}
+
+  /* Contact channel cards: horizontal on mobile */
+  .contact-channel{flex-direction:row;align-items:center;gap:1rem;padding:1.1rem 1.2rem}
+  .channel-icon-wrap{width:42px;height:42px;flex-shrink:0}
+  .channel-icon-wrap svg{width:18px;height:18px}
+  .channel-value{font-size:.82rem}
+  .form-row{grid-template-columns:1fr}
+
+  .footer-inner{flex-direction:column;text-align:center;gap:.5rem}
+
+  /* Prevent horizontal scroll from SVG banners */
+  .proj-banner svg,.dash-screen svg{max-width:100%;overflow:hidden}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<header id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">Deepika<span>.</span>R</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#Skill Stack">Skill Stack</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#dashboards">Dashboards</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#resume-cta" class="nav-resume">Resume</a>
+    <div class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" onclick="toggleMenu()">About</a></li>
+    <li><a href="#Skill Stack" onclick="toggleMenu()">Skill Stack</a></li>
+    <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+    <li><a href="#dashboards" onclick="toggleMenu()">Dashboards</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+    <li><a href="#resume-cta" onclick="toggleMenu()">Resume</a></li>
+  </ul>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-glow"></div>
+  <div class="hero-bg-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-status"><div class="hero-status-dot"></div>Available for Hire</div>
+    <div class="hero-name">Deepika Rajasekar</div>
+    <h1 class="hero-headline">
+      DATA<br>
+      <span class="line-red">ANALYST</span><br>
+    </h1>
+    <p class="hero-value">
+      I turn raw datasets into <strong>clear business decisions</strong> — through SQL, Python, and dashboards that make the right action obvious. Focused on business impact, not just code.
+    </p>
+    <div class="hero-roles">
+      <span class="hero-roles-label">Open to</span>
+      <span class="hero-role-chip">Data Analyst</span>
+      <span class="hero-role-chip">Product Analytics</span>
+      <span class="hero-role-chip">Data Operations</span>
+      <span class="hero-role-chip">Business Intelligence</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-red">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        View Projects
+      </a>
+      <a href="#contact" class="btn-ghost">Let's Connect</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ═══ STATS BAR ═══ -->
+<div id="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item">
+      <span class="stat-n">5</span>
+      <span class="stat-l">Case Studies</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">3</span>
+      <span class="stat-l">Dashboards</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">6+</span>
+      <span class="stat-l">Tools Used</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">3</span>
+      <span class="stat-l">Industries</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">4</span>
+      <span class="stat-l">Role Types</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FEATURED PROJECTS STRIP ═══ -->
+<section id="featured">
+  <div class="featured-inner">
+    <div class="section-eyebrow">Quick Look</div>
+    <h2 class="section-title">FEATURED WORK</h2>
+    <div class="section-rule"></div>
+    <div class="featured-strip reveal">
+      <div class="feat-item">
+        <span class="feat-domain">Retail</span>
+        <div class="feat-title">Sales Performance Analysis</div>
+        <div class="feat-impact">Identified <strong>18% margin gap</strong> from misallocated inventory</div>
+      </div>
+      <div class="feat-item">
+        <span class="feat-domain">E-Commerce</span>
+        <div class="feat-title">Customer Churn Prediction</div>
+        <div class="feat-impact">Flagged <strong>74% churn risk</strong> customers 30 days early</div>
+      </div>
+      <div class="feat-item">
+        <span class="feat-domain">Healthcare</span>
+        <div class="feat-title">Hospital Readmission Study</div>
+        <div class="feat-impact">Modelled <strong>22% readmission reduction</strong> via protocol changes</div>
+      </div>
+      <div class="feat-item">
+        <span class="feat-domain">Marketing</span>
+        <div class="feat-title">Campaign ROI Analysis</div>
+        <div class="feat-impact">Revealed <strong>34% ROI lift</strong> through budget reallocation</div>
+      </div>
+      <div class="feat-item">
+        <span class="feat-domain">Logistics</span>
+        <div class="feat-title">Supply Chain Delay RCA</div>
+        <div class="feat-impact">Traced <strong>68% of delays</strong> to 3 of 14 hubs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <div class="section-eyebrow">About Me</div>
+      <h2 class="section-title">I DECODE DATA INTO DECISIONS</h2>
+      <div class="section-rule"></div>
+      <p>I'm <strong>Aryan Sharma</strong>, a Data Science graduate who believes the true value of analytics is in the business decision it enables — not the algorithm that produced it.</p>
+      <p>Every project I build begins with a real business problem and ends with a concrete, measurable recommendation. I work independently with <strong>SQL, Python, Excel, Power BI, and Tableau</strong> across retail, healthcare, and e-commerce domains.</p>
+      <p>I'm open to roles across <strong>Data Analytics, Product Analytics, Data Operations, and BI</strong> — wherever data drives decisions and clarity matters.</p>
+      <div class="about-tags">
+        <span class="about-tag">B.Sc. Data Science</span>
+        <span class="about-tag">SQL</span>
+        <span class="about-tag">Power BI</span>
+        <span class="about-tag">Python</span>
+        <span class="about-tag">Tableau</span>
+        <span class="about-tag">Business Intelligence</span>
+      </div>
+    </div>
+    <div class="about-cards reveal">
+      <div class="about-card">
+        <div class="about-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#e8192c" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/>
+            <circle cx="12" cy="12" r="1.5" fill="#e8192c" stroke="none"/>
+            <line x1="12" y1="2" x2="12" y2="5.5"/><line x1="12" y1="18.5" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="5.5" y2="12"/><line x1="18.5" y1="12" x2="22" y2="12"/>
+          </svg>
+        </div>
+        <div class="about-card-text">
+          <h4>My Approach</h4>
+          <p>Business problem first. I ask "what decision does this insight enable?" before touching any data.</p>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <rect x="2" y="13" width="4.5" height="8" rx=".5" fill="#e8192c"/>
+            <rect x="9.75" y="8" width="4.5" height="13" rx=".5" fill="#e8192c" opacity=".8"/>
+            <rect x="17.5" y="3" width="4.5" height="18" rx=".5" fill="#e8192c" opacity=".6"/>
+            <line x1="1" y1="21.5" x2="23" y2="21.5" stroke="#e8192c" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="about-card-text">
+          <h4>What I Deliver</h4>
+          <p>Executive-ready dashboards and SQL reports stakeholders can act on — not just admire.</p>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <polygon points="13,2 5,13.5 11.5,13.5 11,22 19,10.5 12.5,10.5" fill="#e8192c"/>
+          </svg>
+        </div>
+        <div class="about-card-text">
+          <h4>My Edge</h4>
+          <p>Fresh thinking + structured analytical training. I communicate findings in plain language, not jargon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Skill Stack ═══ -->
+<section id="Skill Stack">
+  <div class="Skill Stack-inner">
+    <div class="section-eyebrow">Technical Toolkit</div>
+    <h2 class="section-title">Skill Stack & TOOLS</h2>
+    <div class="section-rule"></div>
+    <div class="Skill Stack-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="17" cy="8.5" rx="11" ry="3.8" stroke="#e8192c" stroke-width="1.7"/>
+            <path d="M6 8.5v17c0 2.1 4.9 3.8 11 3.8s11-1.7 11-3.8v-17" stroke="#e8192c" stroke-width="1.7"/>
+            <path d="M6 17c0 2.1 4.9 3.8 11 3.8s11-1.7 11-3.8" stroke="#e8192c" stroke-width="1.3" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <h4>Data Analysis</h4>
+        <div class="skill-pills">
+          <span class="skill-pill">SQL</span><span class="skill-pill">Python</span>
+          <span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span>
+          <span class="skill-pill">Excel</span><span class="skill-pill">Formulas</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="3,28 8,19 14,23 21,11 27,15 31,8" stroke="#e8192c" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="8" cy="19" r="2" fill="#e8192c"/><circle cx="14" cy="23" r="2" fill="#e8192c"/>
+            <circle cx="21" cy="11" r="2" fill="#e8192c"/><circle cx="27" cy="15" r="2" fill="#e8192c"/>
+            <line x1="3" y1="5" x2="3" y2="30" stroke="#e8192c" stroke-width="1.4" stroke-linecap="round" opacity=".45"/>
+            <line x1="3" y1="30" x2="32" y2="30" stroke="#e8192c" stroke-width="1.4" stroke-linecap="round" opacity=".45"/>
+          </svg>
+        </div>
+        <h4>Visualization</h4>
+        <div class="skill-pills">
+          <span class="skill-pill">Power BI</span><span class="skill-pill">Tableau</span>
+          <span class="skill-pill">Matplotlib</span><span class="skill-pill">Seaborn</span>
+          <span class="skill-pill">Plotly</span><span class="skill-pill">Looker</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="9.5" stroke="#e8192c" stroke-width="2"/>
+            <line x1="21" y1="21" x2="30.5" y2="30.5" stroke="#e8192c" stroke-width="2.4" stroke-linecap="round"/>
+            <line x1="9" y1="14" x2="19" y2="14" stroke="#e8192c" stroke-width="1.4" stroke-linecap="round" opacity=".6"/>
+            <line x1="14" y1="9" x2="14" y2="19" stroke="#e8192c" stroke-width="1.4" stroke-linecap="round" opacity=".6"/>
+          </svg>
+        </div>
+        <h4>Data Skill Stack</h4>
+        <div class="skill-pills">
+          <span class="skill-pill">Data Cleaning</span><span class="skill-pill">EDA</span>
+          <span class="skill-pill">Dashboarding</span><span class="skill-pill">KPI Design</span>
+          <span class="skill-pill">Storytelling</span><span class="skill-pill">Statistics</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">
+          <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="17" cy="17" r="4.5" stroke="#e8192c" stroke-width="1.9"/>
+            <path d="M17 5l2 4 4-1 2 4 4 .7L29 17l3 0-3 0 .3 4.3L26 22l-2 4-3.8-1.3L17 29l-1.8-4.3L11.5 26 9.5 22l-4-.8.3-4.2L3 17l3 0-.3-4.3L9 12l2-4 3.8 1.3z" stroke="#e8192c" stroke-width="1.55" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h4>Tools</h4>
+        <div class="skill-pills">
+          <span class="skill-pill">GitHub</span><span class="skill-pill">Jupyter</span>
+          <span class="skill-pill">VS Code</span><span class="skill-pill">Google Sheets</span>
+          <span class="skill-pill">PostgreSQL</span><span class="skill-pill">MySQL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+  <div class="projects-inner">
+    <div class="section-eyebrow">Independent Case Studies</div>
+    <h2 class="section-title">ANALYTICAL PROJECTS</h2>
+    <div class="section-rule"></div>
+    <p class="projects-intro">Each project is a self-directed case study built on public or simulated datasets, structured to mirror real-world business problems from problem definition through to a measurable recommendation.</p>
+
+    <!-- ── PROJECT 1 ── -->
+    <div class="project-card reveal">
+      <div class="proj-banner">
+        <svg viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="900" height="190" fill="#0d0d10"/>
+          <line x1="0" y1="38" x2="900" y2="38" stroke="#1c1c20" stroke-width="1"/>
+          <line x1="0" y1="76" x2="900" y2="76" stroke="#1c1c20" stroke-width="1"/>
+          <line x1="0" y1="114" x2="900" y2="114" stroke="#1c1c20" stroke-width="1"/>
+          <line x1="0" y1="152" x2="900" y2="152" stroke="#1c1c20" stroke-width="1"/>
+          <rect x="55"  y="105" width="48" height="68" fill="#e8192c" opacity=".45" rx="1"/>
+          <rect x="122" y="76"  width="48" height="97" fill="#e8192c" opacity=".6"  rx="1"/>
+          <rect x="189" y="48"  width="48" height="125" fill="#e8192c" opacity=".82" rx="1"/>
+          <rect x="256" y="85"  width="48" height="88" fill="#e8192c" opacity=".56" rx="1"/>
+          <rect x="323" y="58"  width="48" height="115" fill="#e8192c" opacity=".7"  rx="1"/>
+          <rect x="390" y="26"  width="48" height="147" fill="#e8192c" rx="1"/>
+          <rect x="457" y="65"  width="48" height="108" fill="#e8192c" opacity=".66" rx="1"/>
+          <rect x="524" y="90"  width="48" height="83"  fill="#e8192c" opacity=".52" rx="1"/>
+          <rect x="591" y="42"  width="48" height="131" fill="#e8192c" opacity=".86" rx="1"/>
+          <rect x="658" y="70"  width="48" height="103" fill="#e8192c" opacity=".62" rx="1"/>
+          <rect x="725" y="50"  width="48" height="123" fill="#e8192c" opacity=".76" rx="1"/>
+          <rect x="792" y="82"  width="48" height="91"  fill="#e8192c" opacity=".58" rx="1"/>
+          <polyline points="79,98 146,70 213,42 280,76 347,52 414,22 481,60 548,84 615,36 682,64 749,44 816,76"
+            fill="none" stroke="#fff" stroke-width="1.4" opacity=".18" stroke-dasharray="5 3"/>
+          <line x1="40" y1="173" x2="860" y2="173" stroke="#2a2a2e" stroke-width="1"/>
+          <rect x="700" y="12" width="115" height="20" fill="#161619" rx="2"/>
+          <text x="757" y="26" font-family="monospace" font-size="9" fill="#e8192c" text-anchor="middle">↑ 24.3% MoM</text>
+          <rect x="565" y="12" width="100" height="20" fill="#161619" rx="2"/>
+          <text x="615" y="26" font-family="monospace" font-size="9" fill="#555" text-anchor="middle">REV ₹2.4M</text>
+        </svg>
+        <div class="proj-banner-fade"></div>
+        <span class="proj-banner-domain">Retail Analytics</span>
+        <span class="proj-banner-badge">Case Study</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-header">
+          <h3 class="proj-title">RETAIL SALES PERFORMANCE ANALYSIS</h3>
+          <div class="proj-tools">
+            <span class="proj-tool">Python</span><span class="proj-tool">Pandas</span>
+            <span class="proj-tool">SQL</span><span class="proj-tool">Power BI</span>
+          </div>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-step">
+            <div class="proj-step-label">Problem</div>
+            <div class="proj-step-text">Retail chain facing 12% revenue decline with no visibility into root cause by product, region, or segment</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Dataset</div>
+            <div class="proj-step-text">Public retail sales dataset — 80K+ transactions, 12 months, multi-region with SKU-level granularity</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Analysis</div>
+            <div class="proj-step-text">SQL aggregations for region/SKU performance; Python EDA for seasonality; Power BI dashboard for exec summary</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Insight</div>
+            <div class="proj-step-text">Top 20% of SKUs drove 78% of revenue; bottom 40% were margin-negative; Region 3 had low conversion despite high footfall</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Impact</div>
+            <div class="proj-step-text">Inventory reallocation + staffing restructure projected to recover <strong>18% margin gap</strong></div>
+          </div>
+        </div>
+        <div class="proj-impact"><strong>Business Impact:</strong> Identified ₹2.4M revenue leakage traceable to 3 under-optimised regions. Inventory consolidation recommendation modelled an 18% margin improvement without additional spend.</div>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 2 ── -->
+    <div class="project-card reveal">
+      <div class="proj-banner">
+        <svg viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="900" height="190" fill="#0d0d10"/>
+          <line x1="40" y1="10" x2="40" y2="178" stroke="#1e1e22" stroke-width="1"/>
+          <line x1="40" y1="178" x2="880" y2="178" stroke="#1e1e22" stroke-width="1"/>
+          <line x1="40" y1="65" x2="880" y2="65" stroke="#1a1a1e" stroke-width="1"/>
+          <line x1="40" y1="120" x2="880" y2="120" stroke="#1a1a1e" stroke-width="1"/>
+          <line x1="240" y1="10" x2="240" y2="178" stroke="#1a1a1e" stroke-width="1"/>
+          <line x1="470" y1="10" x2="470" y2="178" stroke="#1a1a1e" stroke-width="1"/>
+          <line x1="700" y1="10" x2="700" y2="178" stroke="#1a1a1e" stroke-width="1"/>
+          <circle cx="128" cy="52" r="30" fill="#e8192c" opacity=".16" stroke="#e8192c" stroke-width="1.1"/>
+          <circle cx="162" cy="36" r="20" fill="#e8192c" opacity=".2" stroke="#e8192c" stroke-width="1"/>
+          <circle cx="96"  cy="68" r="13" fill="#e8192c" opacity=".28"/>
+          <text x="138" y="98" font-family="monospace" font-size="9" fill="#e8192c" text-anchor="middle">CHAMPIONS</text>
+          <circle cx="510" cy="90" r="23" fill="#e8192c" opacity=".11" stroke="#e8192c" stroke-width="1" stroke-dasharray="3 2"/>
+          <circle cx="550" cy="68" r="15" fill="#e8192c" opacity=".09" stroke="#e8192c" stroke-width="1" stroke-dasharray="3 2"/>
+          <text x="530" y="128" font-family="monospace" font-size="9" fill="#888" text-anchor="middle">AT RISK</text>
+          <circle cx="775" cy="144" r="19" fill="#2a2a2e" opacity=".7" stroke="#38383d" stroke-width="1"/>
+          <circle cx="808" cy="134" r="11" fill="#242428" opacity=".8"/>
+          <text x="790" y="170" font-family="monospace" font-size="9" fill="#444" text-anchor="middle">DORMANT</text>
+          <circle cx="338" cy="124" r="21" fill="#e8192c" opacity=".09" stroke="#e8192c" stroke-width="1" stroke-dasharray="2 3"/>
+          <text x="338" y="158" font-family="monospace" font-size="9" fill="#666" text-anchor="middle">POTENTIAL</text>
+          <rect x="680" y="12" width="116" height="21" fill="#161619" rx="2"/>
+          <text x="738" y="26" font-family="monospace" font-size="9" fill="#e8192c" text-anchor="middle">74% Churn Risk</text>
+        </svg>
+        <div class="proj-banner-fade"></div>
+        <span class="proj-banner-domain">E-Commerce · Customer Intelligence</span>
+        <span class="proj-banner-badge">Case Study</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-header">
+          <h3 class="proj-title">CUSTOMER CHURN PREDICTION & SEGMENTATION</h3>
+          <div class="proj-tools">
+            <span class="proj-tool">Python</span><span class="proj-tool">Scikit-learn</span>
+            <span class="proj-tool">Tableau</span><span class="proj-tool">Excel</span>
+          </div>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-step">
+            <div class="proj-step-label">Problem</div>
+            <div class="proj-step-text">E-commerce platform losing 25% of subscribers annually with no early-warning system or retention strategy</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Dataset</div>
+            <div class="proj-step-text">Public e-commerce dataset — 50K customers, purchase history, support logs, login frequency over 18 months</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Analysis</div>
+            <div class="proj-step-text">RFM segmentation in Python; logistic regression churn model; Tableau dashboard for retention team</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Insight</div>
+            <div class="proj-step-text">45+ day inactivity = 74% churn probability; high-value churners had 2× more unresolved tickets — service was root cause</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Impact</div>
+            <div class="proj-step-text">Early-warning model enables targeted outreach — <strong>modelled ₹4.2L retention uplift</strong> annually</div>
+          </div>
+        </div>
+        <div class="proj-impact"><strong>Business Impact:</strong> RFM model identified 4 customer clusters; top cluster had 8× higher LTV. Churn model provided 30-day advance warning, enabling targeted re-engagement before cancellation.</div>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 3 ── -->
+    <div class="project-card reveal">
+      <div class="proj-banner">
+        <svg viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="900" height="190" fill="#0d0d10"/>
+          <line x1="0" y1="48" x2="900" y2="48" stroke="#1c1c20" stroke-width="1"/>
+          <line x1="0" y1="95" x2="900" y2="95" stroke="#1c1c20" stroke-width="1"/>
+          <line x1="0" y1="142" x2="900" y2="142" stroke="#1c1c20" stroke-width="1"/>
+          <polygon points="0,175 100,135 200,114 300,150 400,84 500,104 600,68 700,94 800,58 900,79 900,175" fill="#e8192c" opacity=".065"/>
+          <polyline points="0,175 100,135 200,114 300,150 400,84 500,104 600,68 700,94 800,58 900,79" fill="none" stroke="#e8192c" stroke-width="2.2" stroke-linejoin="round"/>
+          <circle cx="400" cy="84" r="4" fill="#e8192c"/>
+          <circle cx="600" cy="68" r="4" fill="#e8192c"/>
+          <circle cx="800" cy="58" r="4" fill="#e8192c"/>
+          <line x1="300" y1="150" x2="300" y2="16" stroke="#e8192c" stroke-width="1" stroke-dasharray="3 3" opacity=".4"/>
+          <rect x="238" y="7" width="128" height="19" fill="#161619" rx="2"/>
+          <text x="302" y="20" font-family="monospace" font-size="8" fill="#e8192c" text-anchor="middle">Friday Discharge ↑31%</text>
+          <line x1="0" y1="103" x2="900" y2="103" stroke="#fff" stroke-width="1" stroke-dasharray="6 4" opacity=".07"/>
+          <text x="22" y="100" font-family="monospace" font-size="7" fill="#3a3a3e">SLA</text>
+          <rect x="718" y="12" width="158" height="20" fill="#161619" rx="2"/>
+          <text x="797" y="26" font-family="monospace" font-size="9" fill="#e8192c" text-anchor="middle">↓ 22% Readmissions</text>
+        </svg>
+        <div class="proj-banner-fade"></div>
+        <span class="proj-banner-domain">Healthcare · Operational Efficiency</span>
+        <span class="proj-banner-badge">Case Study</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-header">
+          <h3 class="proj-title">HOSPITAL READMISSION ANALYSIS</h3>
+          <div class="proj-tools">
+            <span class="proj-tool">SQL</span><span class="proj-tool">Excel</span><span class="proj-tool">Power BI</span>
+          </div>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-step">
+            <div class="proj-step-label">Problem</div>
+            <div class="proj-step-text">Hospital network faces rising 30-day readmissions triggering regulatory penalties and hitting patient satisfaction scores</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Dataset</div>
+            <div class="proj-step-text">Public hospital admissions dataset — 35K records, diagnosis codes, discharge day, ward, comorbidity flags</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Analysis</div>
+            <div class="proj-step-text">SQL cohort analysis by discharge day, ward, and comorbidity count; Power BI heatmap for clinical leadership</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Insight</div>
+            <div class="proj-step-text">Friday discharges = 31% higher readmission; patients with 3+ comorbidities had 2.8× risk; Cardiology outlier identified</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Impact</div>
+            <div class="proj-step-text">Protocol redesign recommendation projected to save <strong>$340K/year</strong> in penalty costs</div>
+          </div>
+        </div>
+        <div class="proj-impact"><strong>Business Impact:</strong> Identified 3 high-leverage protocol changes that, if implemented, model a 22% reduction in preventable readmissions and recovery of $340K in annual regulatory penalties.</div>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 4 ── -->
+    <div class="project-card reveal">
+      <div class="proj-banner">
+        <svg viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="900" height="190" fill="#0d0d10"/>
+          <rect x="100" y="16" width="700" height="29" fill="#e8192c" opacity=".82" rx="2"/>
+          <text x="450" y="35" font-family="monospace" font-size="9" fill="#fff" text-anchor="middle">IMPRESSIONS — 120K</text>
+          <rect x="175" y="54" width="550" height="27" fill="#e8192c" opacity=".63" rx="2"/>
+          <text x="450" y="71" font-family="monospace" font-size="9" fill="#fff" text-anchor="middle">CLICKS — 18.4K (15.3%)</text>
+          <rect x="258" y="90" width="384" height="26" fill="#e8192c" opacity=".42" rx="2"/>
+          <text x="450" y="107" font-family="monospace" font-size="9" fill="#ddd" text-anchor="middle">LEADS — 3.2K (17.4%)</text>
+          <rect x="345" y="125" width="210" height="26" fill="#e8192c" opacity=".25" rx="2"/>
+          <text x="450" y="142" font-family="monospace" font-size="9" fill="#bbb" text-anchor="middle">CONVERSIONS — 640 (20%)</text>
+          <rect x="706" y="16" width="82" height="20" fill="#161619" rx="2"/>
+          <text x="747" y="30" font-family="monospace" font-size="8" fill="#e8192c" text-anchor="middle">ROAS 4.2×</text>
+          <text x="96" y="177" font-family="monospace" font-size="7" fill="#444">Google</text>
+          <rect x="144" y="170" width="88" height="7" fill="#e8192c" opacity=".72" rx="1"/>
+          <text x="264" y="177" font-family="monospace" font-size="7" fill="#444">Email</text>
+          <rect x="300" y="170" width="122" height="7" fill="#e8192c" rx="1"/>
+          <text x="455" y="177" font-family="monospace" font-size="7" fill="#444">Instagram</text>
+          <rect x="516" y="170" width="30" height="7" fill="#e8192c" opacity=".34" rx="1"/>
+          <text x="578" y="177" font-family="monospace" font-size="7" fill="#444">Facebook</text>
+          <rect x="636" y="170" width="55" height="7" fill="#e8192c" opacity=".5" rx="1"/>
+        </svg>
+        <div class="proj-banner-fade"></div>
+        <span class="proj-banner-domain">Marketing Analytics · D2C</span>
+        <span class="proj-banner-badge">Case Study</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-header">
+          <h3 class="proj-title">DIGITAL MARKETING CAMPAIGN ROI ANALYSIS</h3>
+          <div class="proj-tools">
+            <span class="proj-tool">Python</span><span class="proj-tool">Seaborn</span>
+            <span class="proj-tool">Tableau</span><span class="proj-tool">Google Sheets</span>
+          </div>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-step">
+            <div class="proj-step-label">Problem</div>
+            <div class="proj-step-text">D2C brand spending equally across 5 channels with no visibility into which convert to actual revenue</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Dataset</div>
+            <div class="proj-step-text">Simulated marketing dataset — 10K sessions/day, 5 channels, 6-month campaign window with conversion events</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Analysis</div>
+            <div class="proj-step-text">Python ROAS calculation per channel; funnel drop-off analysis in Seaborn; attribution comparison vs last-click</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Insight</div>
+            <div class="proj-step-text">Google Search drove 45% of revenue on 18% of budget; Email had 9× ROI vs paid social for existing customers</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Impact</div>
+            <div class="proj-step-text">Budget reallocation modelled a <strong>34% overall ROI increase</strong> with zero additional spend</div>
+          </div>
+        </div>
+        <div class="proj-impact"><strong>Business Impact:</strong> Revealed a systematic budget misallocation — Instagram received 3× its optimal share. Reallocation model projected 34% ROI improvement without increasing total marketing spend.</div>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 5 ── -->
+    <div class="project-card reveal">
+      <div class="proj-banner">
+        <svg viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="900" height="190" fill="#0d0d10"/>
+          <text x="52" y="43" font-family="monospace" font-size="8" fill="#444" text-anchor="end">Hub A</text>
+          <text x="52" y="76" font-family="monospace" font-size="8" fill="#444" text-anchor="end">Hub B</text>
+          <text x="52" y="109" font-family="monospace" font-size="8" fill="#444" text-anchor="end">Hub C</text>
+          <text x="52" y="142" font-family="monospace" font-size="8" fill="#444" text-anchor="end">Hub D</text>
+          <rect x="58" y="27" width="56" height="25" fill="#e8192c" opacity=".86" rx="1"/>
+          <rect x="122" y="27" width="56" height="25" fill="#e8192c" opacity=".66" rx="1"/>
+          <rect x="186" y="27" width="56" height="25" fill="#e8192c" opacity=".8"  rx="1"/>
+          <rect x="250" y="27" width="56" height="25" fill="#e8192c" opacity=".48" rx="1"/>
+          <rect x="314" y="27" width="56" height="25" fill="#e8192c" opacity=".3"  rx="1"/>
+          <rect x="378" y="27" width="56" height="25" fill="#e8192c" opacity=".56" rx="1"/>
+          <rect x="58" y="60" width="56" height="25" fill="#e8192c" opacity=".32" rx="1"/>
+          <rect x="122" y="60" width="56" height="25" fill="#e8192c" opacity=".46" rx="1"/>
+          <rect x="186" y="60" width="56" height="25" fill="#e8192c" opacity=".23" rx="1"/>
+          <rect x="250" y="60" width="56" height="25" fill="#e8192c" opacity=".6"  rx="1"/>
+          <rect x="314" y="60" width="56" height="25" fill="#e8192c" opacity=".17" rx="1"/>
+          <rect x="378" y="60" width="56" height="25" fill="#e8192c" opacity=".4"  rx="1"/>
+          <rect x="58" y="93" width="56" height="25" fill="#e8192c" opacity=".14" rx="1"/>
+          <rect x="122" y="93" width="56" height="25" fill="#e8192c" opacity=".18" rx="1"/>
+          <rect x="186" y="93" width="56" height="25" fill="#e8192c" opacity=".16" rx="1"/>
+          <rect x="250" y="93" width="56" height="25" fill="#e8192c" opacity=".22" rx="1"/>
+          <rect x="314" y="93" width="56" height="25" fill="#e8192c" opacity=".1"  rx="1"/>
+          <rect x="378" y="93" width="56" height="25" fill="#e8192c" opacity=".19" rx="1"/>
+          <rect x="58"  y="126" width="56" height="25" fill="#222226" rx="1"/>
+          <rect x="122" y="126" width="56" height="25" fill="#1e1e22" rx="1"/>
+          <rect x="186" y="126" width="56" height="25" fill="#202024" rx="1"/>
+          <rect x="250" y="126" width="56" height="25" fill="#222226" rx="1"/>
+          <rect x="314" y="126" width="56" height="25" fill="#1c1c20" rx="1"/>
+          <rect x="378" y="126" width="56" height="25" fill="#1e1e22" rx="1"/>
+          <text x="87"  y="167" font-family="monospace" font-size="7" fill="#3a3a3e" text-anchor="middle">Jan</text>
+          <text x="150" y="167" font-family="monospace" font-size="7" fill="#3a3a3e" text-anchor="middle">Feb</text>
+          <text x="214" y="167" font-family="monospace" font-size="7" fill="#3a3a3e" text-anchor="middle">Mar</text>
+          <text x="278" y="167" font-family="monospace" font-size="7" fill="#3a3a3e" text-anchor="middle">Apr</text>
+          <text x="342" y="167" font-family="monospace" font-size="7" fill="#3a3a3e" text-anchor="middle">May</text>
+          <text x="406" y="167" font-family="monospace" font-size="7" fill="#3a3a3e" text-anchor="middle">Jun</text>
+          <line x1="490" y1="16" x2="490" y2="158" stroke="#1e1e22" stroke-width="1"/>
+          <polyline points="510,148 552,118 595,96 636,126 678,76 720,56 762,86 805,50 848,66" fill="none" stroke="#e8192c" stroke-width="2.2" stroke-linejoin="round"/>
+          <polygon points="510,148 552,118 595,96 636,126 678,76 720,56 762,86 805,50 848,66 848,158 510,158" fill="#e8192c" opacity=".055"/>
+          <rect x="708" y="12" width="162" height="20" fill="#161619" rx="2"/>
+          <text x="789" y="26" font-family="monospace" font-size="8" fill="#e8192c" text-anchor="middle">58% SLA Breach Reduction</text>
+        </svg>
+        <div class="proj-banner-fade"></div>
+        <span class="proj-banner-domain">Supply Chain · Logistics</span>
+        <span class="proj-banner-badge">Case Study</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-header">
+          <h3 class="proj-title">SUPPLY CHAIN DELAY ROOT CAUSE ANALYSIS</h3>
+          <div class="proj-tools">
+            <span class="proj-tool">SQL</span><span class="proj-tool">Python</span><span class="proj-tool">Power BI</span>
+          </div>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-step">
+            <div class="proj-step-label">Problem</div>
+            <div class="proj-step-text">Logistics company averaging 3.4-day SLA breaches, triggering escalations and contract penalty clauses</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Dataset</div>
+            <div class="proj-step-text">Simulated logistics dataset — 14 hubs, 100K shipments, delay timestamps, supplier categories, seasonal flags</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Analysis</div>
+            <div class="proj-step-text">SQL root cause query by hub, season, and supplier; Python heatmap for delay pattern; Power BI ops dashboard</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Insight</div>
+            <div class="proj-step-text">68% of all delays traced to 3 of 14 hubs; Oct–Dec delays 4× higher — no seasonal capacity plan; Supplier B had 2× lead time</div>
+          </div>
+          <div class="proj-step">
+            <div class="proj-step-label">Impact</div>
+            <div class="proj-step-text">Targeted hub fixes modelled a <strong>58% SLA breach reduction</strong>, recovering ₹8L in penalties</div>
+          </div>
+        </div>
+        <div class="proj-impact"><strong>Business Impact:</strong> By fixing just 3 underperforming hubs, the model projects a 58% reduction in SLA breaches — recovering ₹8L in annual penalty fees without adding new infrastructure.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ DASHBOARDS ═══ -->
+<section id="dashboards">
+  <div class="dash-inner">
+    <div class="section-eyebrow">Visual Storytelling</div>
+    <h2 class="section-title">DASHBOARD GALLERY</h2>
+    <div class="section-rule"></div>
+    <div class="dash-grid">
+
+      <div class="dash-card reveal">
+        <div class="dash-screen">
+          <svg viewBox="0 0 400 170" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="170" fill="#09090b"/>
+            <rect x="28" y="110" width="29" height="40" fill="#e8192c" opacity=".75" rx="1"/>
+            <rect x="70" y="84"  width="29" height="66" fill="#e8192c" opacity=".78" rx="1"/>
+            <rect x="112" y="58" width="29" height="92" fill="#e8192c" rx="1"/>
+            <rect x="154" y="92" width="29" height="58" fill="#e8192c" opacity=".62" rx="1"/>
+            <rect x="196" y="70" width="29" height="80" fill="#e8192c" opacity=".78" rx="1"/>
+            <rect x="238" y="38" width="29" height="112" fill="#e8192c" rx="1"/>
+            <rect x="280" y="80" width="29" height="70" fill="#e8192c" opacity=".68" rx="1"/>
+            <rect x="322" y="58" width="29" height="92" fill="#e8192c" opacity=".82" rx="1"/>
+            <polyline points="42,104 84,78 126,52 168,84 210,62 252,32 294,74 336,52"
+              fill="none" stroke="#fff" stroke-width="1.4" opacity=".2" stroke-dasharray="4 3"/>
+            <line x1="20" y1="150" x2="368" y2="150" stroke="#1e1e22" stroke-width="1"/>
+            <rect x="26" y="10" width="74" height="20" fill="#141417" rx="2"/>
+            <text x="63" y="24" font-family="monospace" font-size="8" fill="#e8192c" text-anchor="middle">↑ 24.3%</text>
+            <rect x="114" y="10" width="74" height="20" fill="#141417" rx="2"/>
+            <text x="151" y="24" font-family="monospace" font-size="8" fill="#555" text-anchor="middle">₹2.4M</text>
+            <rect x="202" y="10" width="74" height="20" fill="#141417" rx="2"/>
+            <text x="239" y="24" font-family="monospace" font-size="8" fill="#555" text-anchor="middle">ROI 18.7%</text>
+          </svg>
+        </div>
+        <div class="dash-body">
+          <div class="dash-title">SALES PERFORMANCE</div>
+          <p class="dash-desc">Revenue by region, product, and time. Identifies underperforming territories and top SKUs instantly for sales leadership.</p>
+          <div class="dash-tags">
+            <span class="dash-tag">Revenue Trend</span>
+            <span class="dash-tag">Target vs Actual</span>
+            <span class="dash-tag">Regional View</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-card reveal">
+        <div class="dash-screen">
+          <svg viewBox="0 0 400 170" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="170" fill="#09090b"/>
+            <line x1="48" y1="10" x2="48" y2="158" stroke="#1e1e22" stroke-width="1"/>
+            <line x1="48" y1="158" x2="380" y2="158" stroke="#1e1e22" stroke-width="1"/>
+            <circle cx="118" cy="56" r="33" fill="#e8192c" opacity=".2" stroke="#e8192c" stroke-width="1.1"/>
+            <text x="118" y="52" font-family="monospace" font-size="7.5" fill="#e8192c" text-anchor="middle">CHAMPIONS</text>
+            <text x="118" y="63" font-family="monospace" font-size="7" fill="#777" text-anchor="middle">28%</text>
+            <circle cx="236" cy="90" r="23" fill="#e8192c" opacity=".12" stroke="#e8192c" stroke-width="1" stroke-dasharray="3 2"/>
+            <text x="236" y="86" font-family="monospace" font-size="7.5" fill="#e8192c" text-anchor="middle">AT RISK</text>
+            <text x="236" y="97" font-family="monospace" font-size="7" fill="#777" text-anchor="middle">19%</text>
+            <circle cx="318" cy="124" r="17" fill="#2a2a2e" opacity=".6" stroke="#383840" stroke-width="1"/>
+            <text x="318" y="120" font-family="monospace" font-size="7" fill="#555" text-anchor="middle">DORMANT</text>
+            <text x="318" y="131" font-family="monospace" font-size="7" fill="#444" text-anchor="middle">33%</text>
+            <circle cx="156" cy="122" r="20" fill="#e8192c" opacity=".1" stroke="#e8192c" stroke-width="1" stroke-dasharray="2 3"/>
+            <text x="156" y="118" font-family="monospace" font-size="7" fill="#666" text-anchor="middle">POTENTIAL</text>
+            <text x="156" y="129" font-family="monospace" font-size="7" fill="#555" text-anchor="middle">20%</text>
+          </svg>
+        </div>
+        <div class="dash-body">
+          <div class="dash-title">CUSTOMER SEGMENTATION</div>
+          <p class="dash-desc">RFM clusters mapped visually. Enables marketing to personalise campaigns per segment and prioritise high-LTV retention.</p>
+          <div class="dash-tags">
+            <span class="dash-tag">RFM Segments</span>
+            <span class="dash-tag">LTV by Cluster</span>
+            <span class="dash-tag">Churn Risk</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-card reveal">
+        <div class="dash-screen">
+          <svg viewBox="0 0 400 170" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="170" fill="#09090b"/>
+            <polygon points="48,18 352,18 320,52 80,52"   fill="#e8192c" opacity=".8"/>
+            <text x="200" y="38" font-family="monospace" font-size="8.5" fill="#fff" text-anchor="middle">IMPRESSIONS — 120K</text>
+            <polygon points="80,57 320,57 289,88 111,88"  fill="#e8192c" opacity=".56"/>
+            <text x="200" y="76" font-family="monospace" font-size="8.5" fill="#fff" text-anchor="middle">CLICKS — 18.4K (15.3%)</text>
+            <polygon points="111,93 289,93 264,122 136,122" fill="#e8192c" opacity=".36"/>
+            <text x="200" y="111" font-family="monospace" font-size="8.5" fill="#ddd" text-anchor="middle">LEADS — 3.2K (17.4%)</text>
+            <polygon points="136,127 264,127 244,154 156,154" fill="#e8192c" opacity=".2"/>
+            <text x="200" y="143" font-family="monospace" font-size="8.5" fill="#bbb" text-anchor="middle">CONVERSIONS — 640</text>
+            <rect x="286" y="14" width="78" height="19" fill="#141417" rx="2"/>
+            <text x="325" y="27" font-family="monospace" font-size="8" fill="#e8192c" text-anchor="middle">ROAS 4.2×</text>
+          </svg>
+        </div>
+        <div class="dash-body">
+          <div class="dash-title">MARKETING CAMPAIGN ROI</div>
+          <p class="dash-desc">Full funnel from impression to conversion. Shows channel ROAS, drop-off points, and budget efficiency at a glance.</p>
+          <div class="dash-tags">
+            <span class="dash-tag">Funnel</span>
+            <span class="dash-tag">Channel ROAS</span>
+            <span class="dash-tag">A/B Results</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESUME CTA ═══ -->
+<section id="resume-cta">
+  <div class="resume-inner">
+    <div class="section-eyebrow">Career Documents</div>
+    <h2 class="section-title">READY TO CONTRIBUTE FROM DAY ONE</h2>
+    <p>My resume is one page, achievement-focused, and tailored for Data Analyst roles. Download it to see how my case study projects translate directly to business value.</p>
+    <a href="#" class="btn-white" onclick="alert('Link your PDF resume here')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Resume (PDF)
+    </a>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-eyebrow">Get In Touch</div>
+    <h2 class="section-title">LET'S WORK TOGETHER</h2>
+    <div class="section-rule"></div>
+    <p class="contact-intro">I'm actively looking for Data Analyst opportunities — full-time, contract, or internship. Whether you have a role, a dataset, or just a question, I'd love to connect.</p>
+
+    <div class="contact-grid">
+
+      <!-- Left: big icon channel cards -->
+      <div>
+        <div class="contact-channels">
+
+          <a href="https://linkedin.com/in/deepika-rs" class="contact-channel" target="_blank">
+            <div class="channel-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+            <div>
+              <span class="channel-label">LinkedIn</span>
+              <div class="channel-value">Deepika Rajasekar</div>
+              <div class="channel-action">View Profile →</div>
+            </div>
+          </a>
+
+          <a href="https://github.com/Deepika-Rajasekar" class="contact-channel" target="_blank">
+            <div class="channel-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
+            <div>
+              <span class="channel-label">GitHub</span>
+              <div class="channel-value">Deepika Rajasekar</div>
+              <div class="channel-action">View Repos →</div>
+            </div>
+          </a>
+
+          <a href="/cdn-cgi/l/email-protection#f8998a819996d68b90998a9599b89d95999194d69b9795" class="contact-channel">
+            <div class="channel-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+            <div>
+              <span class="channel-label">Email</span>
+              <div class="channel-value">deepika.rajasekar07<br>@gmail.com</div>
+              <div class="channel-action">Send Email →</div>
+            </div>
+          </a>
+
+          <a href="#resume-cta" class="contact-channel">
+            <div class="channel-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="#e8192c" opacity=".3"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="#e8192c" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>
+            </div>
+            <div>
+              <span class="channel-label">Resume</span>
+              <div class="channel-value">Data Analyst CV</div>
+              <div class="channel-action">Download PDF →</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Right: contact form -->
+      <div class="contact-form">
+        <div class="contact-form-title">SEND A MESSAGE</div>
+        <p class="contact-form-sub">Have a role, a project, or just want to talk data? Fill in below and I'll get back to you promptly.</p>
+        <div class="form-row">
+          <input type="text" placeholder="Your Name"/>
+          <input type="email" placeholder="Your Email"/>
+        </div>
+        <textarea placeholder="Tell me about the opportunity or what you'd like to discuss..."></textarea>
+        <button class="btn-red" onclick="alert('Message sent! (Demo — wire to your backend)')">
+          Send Message
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<script>
+/* ── Mobile menu toggle with X animation ── */
+function toggleMenu(){
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.querySelector('.nav-hamburger');
+  const isOpen = menu.classList.toggle('open');
+  const bars = burger.querySelectorAll('span');
+  if(isOpen){
+    bars[0].style.cssText='transform:translateY(7px) rotate(45deg)';
+    bars[1].style.cssText='opacity:0;transform:scaleX(0)';
+    bars[2].style.cssText='transform:translateY(-7px) rotate(-45deg)';
+  } else {
+    bars.forEach(b=>b.style.cssText='');
+  }
+}
+
+/* ── Close mobile menu on outside click ── */
+document.addEventListener('click',e=>{
+  const menu=document.getElementById('mobileMenu');
+  const burger=document.querySelector('.nav-hamburger');
+  if(menu.classList.contains('open')&&!menu.contains(e.target)&&!burger.contains(e.target)){
+    menu.classList.remove('open');
+    burger.querySelectorAll('span').forEach(b=>b.style.cssText='');
+  }
+});
+
+/* ── Scroll reveal ── */
+const revealObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}
+  });
+},{threshold:0.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+/* ── Active nav link on scroll ── */
+const sections = document.querySelectorAll('section[id], div[id="stats-bar"]');
+const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
+const activeObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id = e.target.id;
+      navLinks.forEach(a=>{
+        a.style.color = a.getAttribute('href')==='#'+id ? 'var(--white)' : '';
+      });
+    }
+  });
+},{threshold:0.35});
+sections.forEach(s=>activeObs.observe(s));
+</script>
